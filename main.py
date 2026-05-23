@@ -1,7 +1,6 @@
 import os
 from telethon import TelegramClient, events
 
-# Railway Variables
 api_id = int(os.environ["37016967"])
 api_hash = os.environ["a55a0cd4bdaf52d12f29b322547c5eac"]
 
