@@ -1,8 +1,9 @@
-from telethon import TelegramClient, events
 import os
+from telethon import TelegramClient, events
 
-api_id = int(os.getenv("API_ID"))
-api_hash = os.getenv("API_HASH")
+# Railway Variables
+api_id = int(os.environ["37016967"])
+api_hash = os.environ["a55a0cd4bdaf52d12f29b322547c5eac"]
 
 client = TelegramClient("session", api_id, api_hash)
 
@@ -13,34 +14,28 @@ async def pay(event):
 💳 PAYMENT METHODS
 ━━━━━━━━━━━━━━
 
-🟣 Bkash (Merchant)
+🟣 Bkash
 ➤ `01331202837`
 
-🟠 Nagad (Personal)
+🟠 Nagad
 ➤ `01957858795`
 
-🔵 Rocket (Personal)
+🔵 Rocket
 ➤ `01957858795`
 
-🟢 Upay (Personal)
+🟢 Upay
 ➤ `01957858795`
-
-━━━━━━━━━━━━━━
-📌 Hold number to copy
 """)
+
 
 @client.on(events.NewMessage(pattern=r'/calc (.+)'))
 async def calc(event):
     try:
         expression = event.pattern_match.group(1)
         result = eval(expression)
-
-        await event.reply(
-            f"🧮 Calculator\n\n`{expression}` = `{result}`"
-        )
+        await event.reply(f"🧮 Result: `{result}`")
     except:
-        await event.reply("❌ Invalid calculation")
-
+        await event.reply("❌ Invalid")
 
 print("Userbot Running...")
 client.start()
