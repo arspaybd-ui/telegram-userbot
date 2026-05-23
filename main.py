@@ -12,7 +12,6 @@ client = TelegramClient(
     api_hash
 )
 
-
 @client.on(events.NewMessage(pattern='/pay'))
 async def pay(event):
     await event.reply("""
@@ -23,10 +22,15 @@ async def pay(event):
 
 🟠 Nagad
 `01957858795`
-""")
 
+🔵 Rocket
+`01957858795`
+
+🟢 Upay
+`01957858795`
+""")
 
 print("Userbot Running...")
 
-client.connect()
-client.run_until_disconnected()
+with client:
+    client.run_until_disconnected()
