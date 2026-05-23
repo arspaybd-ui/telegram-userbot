@@ -1,40 +1,64 @@
 import os
 from telethon import TelegramClient, events
 
-api_id = int(os.environ["37016967"])
-api_hash = os.environ["a55a0cd4bdaf52d12f29b322547c5eac"]
+# Railway Variables
+api_id = int(os.environ["API_ID"])
+api_hash = os.environ["API_HASH"]
 
+# Client
 client = TelegramClient("session", api_id, api_hash)
 
 
-@client.on(events.NewMessage(pattern='/pay'))
+# START COMMAND
+@client.on(events.NewMessage(pattern='/start'))
+async def start(event):
+    await event.reply("""
+🤖 USERBOT ACTIVE
+
+Commands:
+/pay - Payment methods
+/calc 10+5 - Calculator
+""")
+
+
+# PAYMENT COMMAND
+@client.on(events.NewMessage(pattern='/Apay'))
 async def pay(event):
     await event.reply("""
 💳 PAYMENT METHODS
 ━━━━━━━━━━━━━━
 
-🟣 Bkash
+🟣 Bkash (Merchant)
 ➤ `01331202837`
 
-🟠 Nagad
+🟠 Nagad (Personal)
 ➤ `01957858795`
 
-🔵 Rocket
+🔵 Rocket (Personal)
 ➤ `01957858795`
 
-🟢 Upay
+🟢 Upay (Personal)
 ➤ `01957858795`
+
+━━━━━━━━━━━━━━
+📌 Hold number to copy
 """)
 
 
+# CALCULATOR COMMAND
 @client.on(events.NewMessage(pattern=r'/calc (.+)'))
 async def calc(event):
     try:
         expression = event.pattern_match.group(1)
         result = eval(expression)
-        await event.reply(f"🧮 Result: `{result}`")
+
+        await event.reply(
+            f"🧮 Calculator\n\n`{expression}` = `{result}`"
+        )
+
     except:
-        await event.reply("❌ Invalid")
+        await event.reply("❌ Invalid calculation")
+
 
 print("Userbot Running...")
 client.start()
