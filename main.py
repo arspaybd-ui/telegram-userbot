@@ -12,7 +12,7 @@ client = TelegramClient(
     api_hash
 )
 
-@client.on(events.NewMessage(pattern='/Apay'))
+@client.on(events.NewMessage(pattern='Apay'))
 async def pay(event):
     await event.reply("""
 💳 PAYMENT METHODS
@@ -30,6 +30,20 @@ async def pay(event):
 `01957858795`
 """)
 
+# CALCULATOR COMMAND
+@client.on(events.NewMessage(pattern=r'c (.+)'))
+async def calc(event):
+    try:
+        expression = event.pattern_match.group(1)
+        result = eval(expression)
+
+        await event.reply(
+            f"🧮 Calculator\n\n`{expression}` = `{result}`"
+        )
+
+    except:
+        await event.reply("❌ Invalid calculation")
+        
 print("Userbot Running...")
 
 with client:
