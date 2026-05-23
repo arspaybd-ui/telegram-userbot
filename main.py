@@ -17,7 +17,10 @@ async def pay(event):
     await event.reply("""
 💳 PAYMENT METHODS
 
-🟣 Bkash
+🟣 Bkash Parsonal
+`01957858795`
+
+🟣 Bkash Merchant
 `01331202837`
 
 🟠 Nagad
