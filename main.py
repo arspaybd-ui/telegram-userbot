@@ -4,6 +4,7 @@ from telethon import TelegramClient, events
 # Railway Variables
 api_id = int(os.environ["API_ID"])
 api_hash = os.environ["API_HASH"]
+session = os.environ["SESSION"]
 
 # Client
 client = TelegramClient("session", api_id, api_hash)
