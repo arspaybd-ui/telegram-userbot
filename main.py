@@ -31,7 +31,7 @@ async def pay(event):
 """)
 
 # CALCULATOR COMMAND
-@client.on(events.NewMessage(pattern=r' (.+)'))
+@client.on(events.NewMessage(pattern=r'c (.+)'))
 async def calc(event):
     try:
         expression = event.pattern_match.group(1)
