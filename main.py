@@ -31,18 +31,28 @@ async def pay(event):
 """)
 
 # CALCULATOR COMMAND
-@client.on(events.NewMessage(pattern=r'c (.+)'))
+@client.on(events.NewMessage(pattern=r' (.+)'))
 async def calc(event):
     try:
         expression = event.pattern_match.group(1)
         result = eval(expression)
 
-        await event.reply(
-            f"🧮 Calculator\n\n`{expression}` = `{result}`"
-        )
+        await event.reply(f"""
+✓ CALCULATION COMPLETED
+
+➥ INPUT : {expression}
+➥ RESULT : {result}
+
+━━━━━━━━━━━━━━
+""")
 
     except:
-        await event.reply("❌ Invalid calculation")
+        await event.reply("""
+✗ CALCULATION FAILED
+
+➥ Invalid input
+━━━━━━━━━━━━━━
+""")
         
 print("Userbot Running...")
 
