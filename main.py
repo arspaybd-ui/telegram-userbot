@@ -23,13 +23,13 @@ async def pay(event):
 🟣 Bkash Merchant
 `01331202837`
 
-🟠 Nagad
+🟠 Nagad Parsonal
 `01957858795`
 
-🔵 Rocket
+🔵 Rocket Parsonal
 `01957858795`
 
-🟢 Upay
+🟢 Upay Parsonal
 `01957858795`
 """)
 
