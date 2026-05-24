@@ -12,7 +12,7 @@ client = TelegramClient(
     api_hash
 )
 
-@client.on(events.NewMessage(pattern='/pay'))
+@client.on(events.NewMessage(pattern='Apay'))
 async def pay(event):
     await event.reply("""
 💳 পেমেন্ট নাম্বার সমূহ
