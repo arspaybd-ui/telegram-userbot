@@ -57,7 +57,7 @@ async def calc(event):
 ━━━━━━━━━━━━━━
 """)
         # PAYMENT VERIFY COMMAND
-@client.on(events.NewMessage(pattern='/verify'))
+@client.on(events.NewMessage(pattern='verify'))
 async def verify(event):
     await event.reply("""
 ✓ পেমেন্ট ভেরিফিকেশন
