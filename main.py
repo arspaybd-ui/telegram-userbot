@@ -12,25 +12,28 @@ client = TelegramClient(
     api_hash
 )
 
-@client.on(events.NewMessage(pattern='Apay'))
+@client.on(events.NewMessage(pattern='/pay'))
 async def pay(event):
     await event.reply("""
-💳 PAYMENT METHODS
+💳 পেমেন্ট নাম্বার সমূহ
+━━━━━━━━━━━━━━━━
 
-🟣 Bkash Parsonal
-`01957858795`
+🟣 বিকাশ (মার্চেন্ট)
+➥ `01331202837`
 
-🟣 Bkash Merchant
-`01331202837`
+🟠 নগদ (পার্সোনাল)
+➥ `01957858795`
 
-🟠 Nagad Parsonal
-`01957858795`
+🔵 রকেট (পার্সোনাল)
+➥ `01957858795`
 
-🔵 Rocket Parsonal
-`01957858795`
+🟢 উপায় (পার্সোনাল)
+➥ `01957858795`
 
-🟢 Upay Parsonal
-`01957858795`
+━━━━━━━━━━━━━━━━
+
+✓ পেমেন্ট শেষে স্ক্রিনশট ও
+ট্রানজেকশন আইডি পাঠান।
 """)
 
 # CALCULATOR COMMAND
