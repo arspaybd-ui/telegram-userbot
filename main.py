@@ -48,6 +48,7 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 @client.on(events.NewMessage)
 async def auto_calc(event):
+
     try:
         text = event.raw_text.strip()
 
@@ -68,6 +69,9 @@ async def auto_calc(event):
 
 ━━━━━━━━━━━━━━━━━━
 """)
+
+    except Exception:
+        pass
 
         
 print("Userbot Running...")
