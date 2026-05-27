@@ -42,29 +42,36 @@ async def pay(event):
 
 ❤️ ধন্যবাদ
 """)
-# CALCULATOR COMMAND
-@client.on(events.NewMessage(pattern=r'c (.+)'))
-async def calc(event):
+# AUTO CALCULATOR
+
+@client.on(events.NewMessage)
+async def auto_calc(event):
     try:
-        expression = event.pattern_match.group(1)
-        result = eval(expression)
+        text = event.raw_text.strip()
 
-        await event.reply(f"""
-✓ CALCULATION COMPLETED
+        # শুধু math expression হলে কাজ করবে
+        allowed = "0123456789+-*/().% "
 
-➥ INPUT : {expression}
-➥ RESULT : {result}
+        if all(ch in allowed for ch in text):
 
-━━━━━━━━━━━━━━
+            result = eval(text)
+
+            await event.reply(f"""
+╔════════════════╗
+      🧮 ক্যালকুলেটর
+╚════════════════╝
+
+➥ INPUT:
+`{text}`
+
+➥ RESULT:
+`{result}`
+
+━━━━━━━━━━━━━━━━
 """)
 
     except:
-        await event.reply("""
-✗ CALCULATION FAILED
-
-➥ Invalid input
-━━━━━━━━━━━━━━
-""")
+        pass
         # PAYMENT VERIFY COMMAND
 @client.on(events.NewMessage(pattern='verify'))
 async def verify(event):
