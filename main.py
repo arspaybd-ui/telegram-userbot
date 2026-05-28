@@ -44,27 +44,30 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
-# =========================
-# PRIVATE CALCULATOR
-# =========================
+# AUTO CALCULATOR
 
-@client.on(events.NewMessage(pattern=r'\.calc (.+)'))
-async def calc(event):
-
-    # শুধু আপনার জন্য
-    if event.sender_id != OWNER_ID:
-        return
+@client.on(events.NewMessage)
+async def auto_calc(event):
 
     try:
-        expression = event.pattern_match.group(1)
+        text = event.raw_text.strip()
 
-        result = eval(expression)
+        # Command ignore করবে
+        if text.startswith("/"):
+            return
 
-        await event.reply(f"""
+        # শুধু math expression হলে
+        allowed = "0123456789+-*/().% "
+
+        if all(ch in allowed for ch in text):
+
+            result = eval(text)
+
+            await event.reply(f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
-➥ `{expression}`
+➥ `{text}`
 
 ➦ Rᴇsᴜʟᴛ :
 ➥ `{result}`
@@ -72,8 +75,8 @@ async def calc(event):
 ━━━━━━━━━━━━━━━━━━
 """)
 
-    except Exception as e:
-        await event.reply(f"❌ Error:\n`{e}`")
+    except Exception:
+        pass
         
 print("Userbot Running...")
 
