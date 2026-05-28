@@ -44,10 +44,16 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
-# AUTO CALCULATOR
+# PRIVATE AUTO CALCULATOR
+
+OWNER_ID = 8674474910
 
 @client.on(events.NewMessage)
 async def auto_calc(event):
+
+    # শুধু আপনার account এ কাজ করবে
+    if event.sender_id != OWNER_ID:
+        return
 
     try:
         text = event.raw_text.strip()
