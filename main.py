@@ -44,20 +44,25 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
-# PRIVATE AUTO CALCULATOR
+# PRIVATE CALCULATOR
 
 OWNER_ID = 8674474910
 
-@client.on(events.NewMessage(pattern=r'^[0-9+\-*/().% ]+$'))
+@client.on(events.NewMessage)
 async def auto_calc(event):
 
-    # শুধু আপনার জন্য
+    # শুধু আপনার account এ কাজ করবে
     if event.sender_id != OWNER_ID:
         return
 
-    try:
-        text = event.raw_text.strip()
+    text = event.raw_text.strip()
 
+    # command ignore করবে
+    if text.startswith("/"):
+        return
+
+    try:
+        # math calculation
         result = eval(text)
 
         await event.reply(f"""
@@ -72,7 +77,7 @@ async def auto_calc(event):
 ━━━━━━━━━━━━━━━━━━
 """)
 
-    except Exception:
+    except:
         pass
 
         
