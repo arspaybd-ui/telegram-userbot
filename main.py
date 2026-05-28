@@ -51,18 +51,17 @@ OWNER_ID = 8674474910
 @client.on(events.NewMessage)
 async def auto_calc(event):
 
-    # শুধু আপনার account এ কাজ করবে
-    if event.sender_id != OWNER_ID:
+    # শুধু নিজের account
+    if not event.out:
         return
 
     try:
         text = event.raw_text.strip()
 
-        # Command ignore করবে
+        # Command ignore
         if text.startswith("/"):
             return
 
-        # শুধু math expression হলে
         allowed = "0123456789+-*/().% "
 
         if all(ch in allowed for ch in text):
