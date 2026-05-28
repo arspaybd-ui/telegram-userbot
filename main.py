@@ -48,28 +48,23 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 OWNER_ID = 8674474910
 
-@client.on(events.NewMessage)
-async def auto_calc(event):
+@client.on(events.NewMessage(pattern=r'(?i)\.calc (.+)'))
+async def calc(event):
 
-    # শুধু আপনার account এ কাজ করবে
+    # শুধু আপনার জন্য
     if event.sender_id != OWNER_ID:
         return
 
-    text = event.raw_text.strip()
-
-    # command ignore করবে
-    if text.startswith("/"):
-        return
-
     try:
-        # math calculation
-        result = eval(text)
+        expression = event.pattern_match.group(1)
+
+        result = eval(expression)
 
         await event.reply(f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
-➥ `{text}`
+➥ `{expression}`
 
 ➦ Rᴇsᴜʟᴛ :
 ➥ `{result}`
@@ -77,9 +72,8 @@ async def auto_calc(event):
 ━━━━━━━━━━━━━━━━━━
 """)
 
-    except:
-        pass
-
+    except Exception:
+        await event.reply("❌ Invalid Calculation")
         
 print("Userbot Running...")
 
