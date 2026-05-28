@@ -48,12 +48,10 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 # PRIVATE CALCULATOR
 # =========================
 
-OWNER_ID = 8674474910
-
 @client.on(events.NewMessage(pattern=r'\.calc (.+)'))
 async def calc(event):
 
-    # শুধু আপনার account
+    # শুধু আপনার জন্য
     if event.sender_id != OWNER_ID:
         return
 
@@ -62,8 +60,7 @@ async def calc(event):
 
         result = eval(expression)
 
-        await event.reply(
-f"""
+        await event.reply(f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
@@ -73,8 +70,7 @@ f"""
 ➥ `{result}`
 
 ━━━━━━━━━━━━━━━━━━
-"""
-        )
+""")
 
     except Exception as e:
         await event.reply(f"❌ Error:\n`{e}`")
