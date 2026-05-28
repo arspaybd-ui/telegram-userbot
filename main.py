@@ -44,27 +44,23 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
-# PRIVATE CALCULATOR
+# PRIVATE AUTO CALCULATOR
 
-OWNER_ID = 8674474910   # আপনার Telegram ID
+OWNER_ID = 8674474910
 
-@client.on(events.NewMessage)
+@client.on(events.NewMessage(pattern=r'^[0-9+\-*/().% ]+$'))
 async def auto_calc(event):
 
-    # শুধু আপনার ID হলে কাজ করবে
+    # শুধু আপনার জন্য
     if event.sender_id != OWNER_ID:
         return
 
     try:
         text = event.raw_text.strip()
 
-        allowed = "0123456789+-*/().% "
+        result = eval(text)
 
-        if all(ch in allowed for ch in text):
-
-            result = eval(text)
-
-            await event.reply(f"""
+        await event.reply(f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
