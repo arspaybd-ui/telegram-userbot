@@ -46,19 +46,17 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 # PRIVATE AUTO CALCULATOR
 
-OWNER_ID = 8674474910
-
 @client.on(events.NewMessage)
 async def auto_calc(event):
 
-    # শুধু নিজের account
+    # শুধু আপনার নিজের message এ কাজ করবে
     if not event.out:
         return
 
     try:
         text = event.raw_text.strip()
 
-        # Command ignore
+        # Command ignore করবে
         if text.startswith("/"):
             return
 
@@ -69,6 +67,8 @@ async def auto_calc(event):
             result = eval(text)
 
             await event.reply(f"""
+╭━━━〔 🧮 Cᴀʟᴄᴜʟᴀᴛᴏʀ 〕━━━╮
+
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
@@ -77,7 +77,7 @@ async def auto_calc(event):
 ➦ Rᴇsᴜʟᴛ :
 ➥ `{result}`
 
-━━━━━━━━━━━━━━━━━━
+╰━━━━━━━━━━━━━━━━━━╯
 """)
 
     except Exception:
