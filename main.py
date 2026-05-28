@@ -44,10 +44,16 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
-# AUTO CALCULATOR
+# PRIVATE CALCULATOR
+
+OWNER_ID = 8674474910   # আপনার Telegram ID
 
 @client.on(events.NewMessage)
 async def auto_calc(event):
+
+    # শুধু আপনার ID হলে কাজ করবে
+    if event.sender_id != OWNER_ID:
+        return
 
     try:
         text = event.raw_text.strip()
