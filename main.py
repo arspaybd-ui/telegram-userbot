@@ -44,14 +44,16 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
+# =========================
 # PRIVATE CALCULATOR
+# =========================
 
 OWNER_ID = 8674474910
 
-@client.on(events.NewMessage(pattern=r'(?i)\.calc (.+)'))
+@client.on(events.NewMessage(pattern=r'\.calc (.+)'))
 async def calc(event):
 
-    # শুধু আপনার জন্য
+    # শুধু আপনার account
     if event.sender_id != OWNER_ID:
         return
 
@@ -60,7 +62,8 @@ async def calc(event):
 
         result = eval(expression)
 
-        await event.reply(f"""
+        await event.reply(
+f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
@@ -70,10 +73,11 @@ async def calc(event):
 ➥ `{result}`
 
 ━━━━━━━━━━━━━━━━━━
-""")
+"""
+        )
 
-    except Exception:
-        await event.reply("❌ Invalid Calculation")
+    except Exception as e:
+        await event.reply(f"❌ Error:\n`{e}`")
         
 print("Userbot Running...")
 
