@@ -44,29 +44,26 @@ Sᴄʀᴇᴇɴsʜᴏᴛ & Tʀx ID Pᴀᴛʜᴀɴ
 
 """)
 
-# PRIVATE AUTO CALCULATOR
-
 @client.on(events.NewMessage)
 async def auto_calc(event):
 
-    # শুধু আপনার নিজের message এ কাজ করবে
     if not event.out:
         return
 
     try:
         text = event.raw_text.strip()
 
-        # Command ignore করবে
+        # Command ignore
         if text.startswith("/"):
             return
 
-        allowed = "0123456789+-*/().% "
+        # Operator না থাকলে calculator চলবে না
+        if not any(op in text for op in ["+", "-", "*", "/"]):
+            return
 
-        if all(ch in allowed for ch in text):
+        result = eval(text)
 
-            result = eval(text)
-
-            await event.reply(f"""
+        await event.reply(f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
 
 ➦ Iɴᴘᴜᴛ :
