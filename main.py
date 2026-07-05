@@ -14,6 +14,11 @@ client = TelegramClient(
 
 @client.on(events.NewMessage(pattern=r'(?i)^apay$'))
 async def pay(event):
+
+    # শুধু আপনার নিজের message হলে কাজ করবে
+    if not event.out:
+        return
+
     await event.reply("""
 ╔══════════════════════╗
       💳 Pᴀʏᴍᴇɴᴛ Mᴇᴛʜᴏᴅs
@@ -23,31 +28,25 @@ async def pay(event):
 ╭────────────────────╮
 │ `01331202837`
 ╰────────────────────╯
-
 🟣 ʙKᴀsʜ • Pᴇʀsᴏɴᴀʟ
 ╭────────────────────╮
 │ `01957858795`
 ╰────────────────────╯
-
 🟠 Nᴀɢᴀᴅ • Pᴇʀsᴏɴᴀʟ
 ╭────────────────────╮
 │ `01957858795`
 ╰────────────────────╯
-
 🔵 Rᴏᴄᴋᴇᴛ • Pᴇʀsᴏɴᴀʟ
 ╭────────────────────╮
 │ `01957858795`
 ╰────────────────────╯
-
 🟢 Uᴘᴀʏ • Pᴇʀsᴏɴᴀʟ
 ╭────────────────────╮
 │ `01957858795`
 ╰────────────────────╯
-
 ━━━━━━━━━━━━━━━━━━━━━━
-
+❤️ Thank You For Choosing ARS TOPUP BD
 """)
-
 @client.on(events.NewMessage)
 async def auto_calc(event):
     if not event.out:
