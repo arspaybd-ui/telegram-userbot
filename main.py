@@ -1,17 +1,26 @@
 import os
-from telethon import TelegramClient,
-events from telethon.sessions
-import StringSession
+from telethon import TelegramClient, events
+from telethon.sessions import StringSession
+
+# =========================
+# Railway Variables
+# =========================
+
 api_id = int(os.environ["API_ID"])
 api_hash = os.environ["API_HASH"]
 session = os.environ["SESSION"]
+
 client = TelegramClient(
     StringSession(session),
     api_id,
     api_hash
 )
 
-@client.on(events.NewMessage(pattern=r'(?i)Apay'))
+# =========================
+# Payment Command
+# =========================
+
+@client.on(events.NewMessage(pattern=r'(?i)^apay$'))
 async def pay(event):
     await event.reply("""
 ╔══════════════════════╗
@@ -60,10 +69,15 @@ async def pay(event):
 ❤️ Tʜᴀɴᴋ Yᴏᴜ Fᴏʀ Cʜᴏᴏsɪɴɢ
 Aʀs Tᴏᴘᴜᴘ Bᴅ
 """)
-@client.on(events.NewMessage)
 
+# =========================
+# Private Auto Calculator
+# =========================
+
+@client.on(events.NewMessage)
 async def auto_calc(event):
 
+    # শুধু আপনার নিজের message
     if not event.out:
         return
 
@@ -74,26 +88,37 @@ async def auto_calc(event):
         if text.startswith("/"):
             return
 
-        # Operator না থাকলে calculator চলবে না
+        # শুধুমাত্র operator থাকলে
         if not any(op in text for op in ["+", "-", "*", "/"]):
+            return
+
+        # শুধু valid character
+        allowed = "0123456789+-*/(). "
+
+        if not all(ch in allowed for ch in text):
             return
 
         result = eval(text)
 
-       await event.reply(f"""
+        await event.reply(f"""
 ╭━━━〔 🧮 Cᴀʟᴄᴜʟᴀᴛᴏʀ 〕━━━╮
+
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
+
 ➥ Iɴᴘᴜᴛ
 `{text}`
+
 ➥ Rᴇsᴜʟᴛ
 `{result}`
+
 ╰━━━━━━━━━━━━━━━━━━╯
 """)
 
     except Exception:
         pass
 
-print("Userbot Running...")
+
+print("✅ Userbot Running...")
 
 with client:
-    client.run_until_disconnected()    
+    client.run_until_disconnected()
