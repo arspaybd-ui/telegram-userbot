@@ -2,10 +2,6 @@ import os
 from telethon import TelegramClient, events
 from telethon.sessions import StringSession
 
-# =========================
-# Railway Variables
-# =========================
-
 api_id = int(os.environ["API_ID"])
 api_hash = os.environ["API_HASH"]
 session = os.environ["SESSION"]
@@ -15,10 +11,6 @@ client = TelegramClient(
     api_id,
     api_hash
 )
-
-# =========================
-# Payment Command
-# =========================
 
 @client.on(events.NewMessage(pattern=r'(?i)^apay$'))
 async def pay(event):
@@ -54,69 +46,51 @@ async def pay(event):
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-📌 Pᴀʏᴍᴇɴᴛ Sᴇɴᴅ Kᴏʀᴀʀ Pᴏʀ
+📌 Payment করার পর Screenshot, Transaction ID,
+Sender Number এবং Amount পাঠান।
 
-✓ Sᴄʀᴇᴇɴsʜᴏᴛ
-✓ Tʀᴀɴsᴀᴄᴛɪᴏɴ ID
-✓ Sᴇɴᴅᴇʀ Nᴜᴍʙᴇʀ
-✓ Pᴀɪᴅ Aᴍᴏᴜɴᴛ
+⚡ Verification Time: 1–10 Minutes
 
-━━━━━━━━━━━━━━━━━━━━━━
-
-⚡ Vᴇʀɪғɪᴄᴀᴛɪᴏɴ Tɪᴍᴇ
-1 - 10 Mɪɴᴜᴛᴇs
-
-❤️ Tʜᴀɴᴋ Yᴏᴜ Fᴏʀ Cʜᴏᴏsɪɴɢ
-Aʀs Tᴏᴘᴜᴘ Bᴅ
+❤️ Thank You For Choosing ARS TOPUP BD
 """)
-
-# =========================
-# Private Auto Calculator
-# =========================
 
 @client.on(events.NewMessage)
 async def auto_calc(event):
-
-    # শুধু আপনার নিজের message
     if not event.out:
         return
-
     try:
         text = event.raw_text.strip()
 
-        # Command ignore
         if text.startswith("/"):
             return
 
-        # শুধুমাত্র operator থাকলে
-        if not any(op in text for op in ["+", "-", "*", "/"]):
+        if not any(op in text for op in ["+","-","*","/"]):
             return
 
-        # শুধু valid character
         allowed = "0123456789+-*/(). "
-
         if not all(ch in allowed for ch in text):
             return
 
         result = eval(text)
 
         await event.reply(f"""
-╭━━━〔 🧮 Cᴀʟᴄᴜʟᴀᴛᴏʀ 〕━━━╮
+╭━━━━━━━━━━━━━━━━━━━━╮
+      ✦ 𝗔𝗥𝗦 𝗖𝗔𝗟𝗖 ✦
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
+🧮 Calculation Successful
 
-➥ Iɴᴘᴜᴛ
-`{text}`
+📥 Input
+└➤ `{text}`
 
-➥ Rᴇsᴜʟᴛ
-`{result}`
+📤 Result
+└➤ `{result}`
 
-╰━━━━━━━━━━━━━━━━━━╯
+━━━━━━━━━━━━━━━━━━━━
+⚡ ARS TOPUP BD
 """)
-
     except Exception:
         pass
-
 
 print("✅ Userbot Running...")
 
