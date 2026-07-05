@@ -14,11 +14,6 @@ client = TelegramClient(
 
 @client.on(events.NewMessage(pattern=r'(?i)^apay$'))
 async def pay(event):
-
-    # শুধু আপনার নিজের message হলে কাজ করবে
-    if not event.out:
-        return
-
     await event.reply("""
 ╔══════════════════════╗
       💳 Pᴀʏᴍᴇɴᴛ Mᴇᴛʜᴏᴅs
@@ -47,33 +42,58 @@ async def pay(event):
 ━━━━━━━━━━━━━━━━━━━━━━
 ❤️ Thank You For Choosing ARS TOPUP BD
 """)
+
+# =========================
+# PRIVATE AUTO CALCULATOR
+# =========================
+
 @client.on(events.NewMessage)
 async def auto_calc(event):
+
+    # শুধু আপনার নিজের message
     if not event.out:
         return
+
     try:
         text = event.raw_text.strip()
 
+        # Command ignore
         if text.startswith("/"):
             return
 
-        if not any(op in text for op in ["+","-","*","/"]):
+        # শুধু operator থাকলে calculator চলবে
+        if not any(op in text for op in ["+", "-", "*", "/"]):
             return
 
+        # শুধু valid character allow
         allowed = "0123456789+-*/(). "
+
         if not all(ch in allowed for ch in text):
             return
 
         result = eval(text)
 
-       await event.reply(f"""
+        await event.reply(f"""
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
+
 ➦ Iɴᴘᴜᴛ :
 ➥ `{text}`
+
 ➦ Rᴇsᴜʟᴛ :
 ➥ `{result}`
+
 ━━━━━━━━━━━━━━━━━━
 """)
+
+    except ZeroDivisionError:
+        await event.reply("""
+❌ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Fᴀɪʟᴇᴅ
+
+➥ Cannot divide by zero.
+
+━━━━━━━━━━━━━━━━━━
+""")
+
     except Exception:
         pass
 
