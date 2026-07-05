@@ -46,12 +46,6 @@ async def pay(event):
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-📌 Payment করার পর Screenshot, Transaction ID,
-Sender Number এবং Amount পাঠান।
-
-⚡ Verification Time: 1–10 Minutes
-
-❤️ Thank You For Choosing ARS TOPUP BD
 """)
 
 @client.on(events.NewMessage)
