@@ -1,3 +1,16 @@
+import os
+from telethon import TelegramClient,
+events from telethon.sessions
+import StringSession
+api_id = int(os.environ["API_ID"])
+api_hash = os.environ["API_HASH"]
+session = os.environ["SESSION"]
+client = TelegramClient(
+    StringSession(session),
+    api_id,
+    api_hash
+)
+
 @client.on(events.NewMessage(pattern=r'(?i)Apay'))
 async def pay(event):
     await event.reply("""
@@ -48,6 +61,7 @@ async def pay(event):
 Aʀs Tᴏᴘᴜᴘ Bᴅ
 """)
 @client.on(events.NewMessage)
+
 async def auto_calc(event):
 
     if not event.out:
@@ -68,22 +82,18 @@ async def auto_calc(event):
 
        await event.reply(f"""
 ╭━━━〔 🧮 Cᴀʟᴄᴜʟᴀᴛᴏʀ 〕━━━╮
-
 ✓ Cᴀʟᴄᴜʟᴀᴛɪᴏɴ Cᴏᴍᴘʟᴇᴛᴇᴅ
-
 ➥ Iɴᴘᴜᴛ
 `{text}`
-
 ➥ Rᴇsᴜʟᴛ
 `{result}`
-
 ╰━━━━━━━━━━━━━━━━━━╯
 """)
 
     except Exception:
         pass
-        
+
 print("Userbot Running...")
 
 with client:
-    client.run_until_disconnected()
+    client.run_until_disconnected()    
